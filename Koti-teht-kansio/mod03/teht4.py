@@ -1,0 +1,6 @@
+luku1 = input('ensimmäinen luku: ')
+luku2 = input('toinen luku: ')
+luku3 = input('kolmas luku: ')
+print("lukujen summa: " + str(float(luku1) + float(luku2) + float(luku3)))
+print("lukujen tulo: " + str(float(luku1) * float(luku2) * float(luku3)))
+print("lukujen tulo: " + str((float(luku1) + float(luku2) + float(luku3)) /3 ))
