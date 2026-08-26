@@ -13,3 +13,7 @@ Sain git pull ja push toimimaan repositorin ja vs coden välillä.
 ## Moduuli 3
 
 Tein moduulin 3 Kotitehtävät 1,2,3,4,5, ja 6. 
+
+## Moduuli 4
+
+Tein moduulin 4 Kotitehtävät 1,2,3, ja 4.
