@@ -29,5 +29,3 @@ class Lentokenttä:
             for kone in self.lentokoneet:
                 kone.tulosta_tiedot()
                 print("")
-
-def pääohjelma =
