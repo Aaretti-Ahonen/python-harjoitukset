@@ -1,7 +1,11 @@
 import random
+from esineet import Esine
+from pelaaja import Pelaaja
+from maailma import Osoite
+
 inventori = [
-     {"nimi": "Kivi", "määrä": 0},
-    {"nimi": "Puu-Hakku", "Voima": 1}
+    {"nimi": "Kivi", "määrä": 0},
+    Esine("Puu-Hakku", 1)
 ]
 
 def kerro_tutoriaali(nimi):
@@ -32,38 +36,55 @@ def nayta_inventori():
 
 nimi = input('Oma Nimi: ')
 ikä = int(input('Oma Ikä: '))
+
 print(f"Pelaaja: {nimi}.\nIkä: {ikä}-Vuotta.")
 
 if ikä < 12:
     print("Olet alaikäinen, ohjelma suljetaan.")
+
 else:
     print("Tervetuloa peliin!")
-    
+
+    pelaaja = Pelaaja(nimi, Osoite("pääalue"))
+    pelaaja.esineet = inventori
+
     while True:
-        print("\n--- PÄÄVALIKKO ---")
-        print("Komennot:")
-        print("1. tutoriaali    - Pelin tutoriaali")
-        print("2. noppa     - Heitä noppaa")
-        #hakkaamaan  -  menee kaivamaan
-        #kauppa -  osta vahvempi hakkuuväline
-        #Vapaus  -  Kokeile onneasi
-        print("3. lisaa     - Lisää esine inventoriin")
-        print("4. inventori - Katso inventorin sisältö")
-        print("5. lopeta    - Sulje ohjelma")
+         
+        if pelaaja.sijainti.osoite == "pääalue":
+            print("\n--- PÄÄALUE ---")
+            print("1. kaivos - Mene kaivokselle")
+            print("2. kauppa - Mene kauppaan")
+            print("3. inventori - Katso inventori")
+            print("4. lopeta - Lopeta peli")
+
+        elif pelaaja.sijainti.osoite == "kaivos":
+            print("\n--- KAIVOS ---")
+            print("1. kaiva - Kaiva kiveä")
+            print("2. pääalue - Palaa pääalueelle")
+            print("3. inventori - Katso inventori")
+
+        elif pelaaja.sijainti.osoite == "kauppa":
+            print("\n--- KAUPPA ---")
+            print("1. pääalue - Palaa pääalueelle")
+            print("2. inventori - Katso inventori")
 
         komento = input("\nSyötä komento: ").strip().lower()
-        
-        
+
         if komento == "tutoriaali":
-         kerro_tutoriaali(nimi)
+            kerro_tutoriaali(nimi)
+
         elif komento == "noppa":
             heita_noppaa()
+
         elif komento == "lisaa":
             lisaa_esine()
+
         elif komento == "inventori":
             nayta_inventori()
+
         elif komento == "lopeta":
             print("Lopetit pelin.")
             break
+
         else:
             print("\nTuntematon komento. Yritä uudelleen.")
