@@ -11,29 +11,6 @@ inventori = [
 def kerro_tutoriaali(nimi):
     print(f"\n> Pelaaja {nimi}, sinun tarkoituksesi on päivittää hakkusi timanttiseksi, jotta pääset takaisin maanpinnalle.")
 
-def heita_noppaa():
-    tulos = random.randint(1, 6)
-    if tulos == 6:
-        print("\n> Heitit noppaa ja sait lukeman: 6 eli natural six.")
-    else:
-        print(f"\n> Heitit noppaa ja sait lukeman: {tulos}")
-
-def lisaa_esine():
-    esine = input("\nMitä haluat lisätä inventoriin? ").strip()
-    if esine:
-        inventori.append(esine)
-        print(f"> Lisäsit esineen '{esine}' inventoriin.")
-    else:
-        print("> Et lisännyt mitään.")
-
-def nayta_inventori():
-    print("\n INVENTORI ")
-    if not inventori:
-        print("Inventori on tyhjä.")
-    else:
-        for esine in inventori:
-            print(f"- {esine}")
-
 nimi = input('Oma Nimi: ')
 ikä = int(input('Oma Ikä: '))
 
@@ -43,7 +20,7 @@ if ikä < 12:
     print("Olet alaikäinen, ohjelma suljetaan.")
 
 else:
-    print("Tervetuloa peliin!")
+    kerro_tutoriaali(nimi)
 
     pelaaja = Pelaaja(nimi, Osoite("pääalue"))
     pelaaja.esineet = inventori
@@ -52,38 +29,69 @@ else:
          
         if pelaaja.sijainti.osoite == "pääalue":
             print("\n--- PÄÄALUE ---")
-            print("1. kaivos - Mene kaivokselle")
-            print("2. kauppa - Mene kauppaan")
+            print("1. kaivos    - Mene kaivokselle")
+            print("2. kauppa    - Mene kauppaan")
             print("3. inventori - Katso inventori")
-            print("4. lopeta - Lopeta peli")
+            print("4. lopeta    - Lopeta peli")
 
         elif pelaaja.sijainti.osoite == "kaivos":
             print("\n--- KAIVOS ---")
-            print("1. kaiva - Kaiva kiveä")
-            print("2. pääalue - Palaa pääalueelle")
+            print("1. kaiva     - Kaiva kiveä")
+            print("2. pääalue   - Palaa pääalueelle")
             print("3. inventori - Katso inventori")
+            print("4. lopeta    - Lopeta peli")
 
         elif pelaaja.sijainti.osoite == "kauppa":
-            print("\n--- KAUPPA ---")
-            print("1. pääalue - Palaa pääalueelle")
-            print("2. inventori - Katso inventori")
+            print(f"\n--- KAUPPA ---\n\nNykyinen hakku: {inventori[1].nimi}\n\nSinulla on {inventori[0]['määrä']} kiveä.\n")
+
+            if inventori[1].nimi == "Puu-Hakku":
+                print("1. päivitä   - Rauta-Hakku (25 kiveä)")
+                print("2. pääalue   - Palaa pääalueelle")
+                print("3. inventori - Katso inventori")
+                print("4. lopeta    - Lopeta peli")
+
+            elif inventori[1].nimi == "Rauta-Hakku":
+                print("1. päivitä   - Timantti-Hakku (250 kiveä)")  
+                print("2. pääalue   - Palaa pääalueelle")
+                print("3. inventori - Katso inventori")
+                print("4. lopeta    - Lopeta peli")
+
+            else:
+                print("1. pakene    - Pakene kaivoksesta (3000 kiveä)")
+                print("2. pääalue   - Palaa pääalueelle")
+                print("3. inventori - Katso inventori")
+                print("4. lopeta    - Lopeta peli")
+
 
         komento = input("\nSyötä komento: ").strip().lower()
 
-        if komento == "tutoriaali":
-            kerro_tutoriaali(nimi)
+        if komento == "kaivos" and pelaaja.sijainti.osoite == "pääalue":
+            pelaaja.liikkuminen(Osoite("kaivos"))
 
-        elif komento == "noppa":
-            heita_noppaa()
+        elif komento == "kauppa" and pelaaja.sijainti.osoite == "pääalue":
+            pelaaja.liikkuminen(Osoite("kauppa"))
 
-        elif komento == "lisaa":
-            lisaa_esine()
+        elif komento == "pääalue":
+            pelaaja.liikkuminen(Osoite("pääalue"))
+
+        elif komento == "kaiva":
+            pelaaja.kaiva()
+
+        elif komento == "päivitä":
+            pelaaja.päivitä()
 
         elif komento == "inventori":
-            nayta_inventori()
+            print("\n INVENTORI ")
+            print(f"- {inventori[0]['nimi']}: {inventori[0]['määrä']}")
+            print(f"- {inventori[1].nimi}")
 
         elif komento == "lopeta":
             print("Lopetit pelin.")
+            break
+
+        elif komento == "pakene" and pelaaja.liikkuminen(Osoite("kauppa")) and inventori[1].nimi == "Timantti-Hakku" and inventori[0]["määrä"] >= 3000:
+            print("\nOnnistuit pakenemaan maanpinnalle!")
+            print("Voitit pelin!")
             break
 
         else:
