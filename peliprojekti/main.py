@@ -22,19 +22,12 @@ if ikä < 12:
 else:
     kerro_tutoriaali(nimi)
 
-    pelaaja = Pelaaja(nimi, Osoite("pääalue"))
+    pelaaja = Pelaaja(nimi, Osoite("kaivos"))
     pelaaja.esineet = inventori
 
     while True:
-         
-        if pelaaja.sijainti.osoite == "pääalue":
-            print("\n--- PÄÄALUE ---")
-            print("1. kaivos    - Mene kaivokselle")
-            print("2. kauppa    - Mene kauppaan")
-            print("3. inventori - Katso inventori")
-            print("4. lopeta    - Lopeta peli")
 
-        elif pelaaja.sijainti.osoite == "kaivos":
+        if pelaaja.sijainti.osoite == "kaivos":
             print("\n--- KAIVOS ---")
             print("1. kaiva     - Kaiva kiveä")
             print("2. pääalue   - Palaa pääalueelle")
@@ -70,9 +63,6 @@ else:
 
         elif komento == "kauppa" and pelaaja.sijainti.osoite == "pääalue":
             pelaaja.liikkuminen(Osoite("kauppa"))
-
-        elif komento == "pääalue":
-            pelaaja.liikkuminen(Osoite("pääalue"))
 
         elif komento == "kaiva":
             pelaaja.kaiva()

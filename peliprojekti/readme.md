@@ -1,7 +1,7 @@
 # Projekti Peli
 Aaretti Ahonen
 
-Pein idea - kaiva kiveä karkaa maanpinnalle
+Pelin idea - kaiva kiveä karkaa maanpinnalle
 
 Peliprojekti on jaettu tiedostoihin, jotka sisältävät
 esineet - pelissä olevat esineet
