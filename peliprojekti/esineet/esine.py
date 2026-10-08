@@ -15,4 +15,4 @@ class Esine:
             inventori[0]["määrä"] = inventori[0]["määrä"] - hinta
 
         else:
-            print("Päivitys ei mahdollinen")
+            print("\nPäivitys ei mahdollinen")

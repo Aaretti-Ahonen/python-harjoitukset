@@ -13,9 +13,9 @@ class Pelaaja:
     def kaiva(self):
         if self.sijainti.osoite == "kaivos":
             self.esineet[0]["määrä"] = self.esineet[0]["määrä"] + random.randint(1, 10) * self.esineet[1].paino
-            print(f"Sinulla on nyt {self.esineet[0]['määrä']} kiveä.")
+            print(f"\nSinulla on nyt {self.esineet[0]['määrä']} kiveä.")
         else:
-            print("Täällä ei voi kaivaa.")
+            print("\nTäällä ei voi kaivaa.")
 
     def päivitä(self):
             if self.esineet[1].nimi == "Puu-Hakku":
@@ -25,11 +25,11 @@ class Pelaaja:
                 hinta = 250
 
             else:
-                print("Päivitys ei mahdollinen")
+                print("\nPäivitys ei mahdollinen")
                 return
 
             if self.sijainti.osoite == "kauppa" and self.esineet[0]["määrä"] >= hinta:
                 Esine.päivitys(self.esineet, hinta)
 
             else:
-                print("Ei tarpeeksi kiveä.")
+                print("\nEi tarpeeksi kiveä.")

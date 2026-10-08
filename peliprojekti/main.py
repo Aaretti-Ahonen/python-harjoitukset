@@ -1,4 +1,3 @@
-import random
 from esineet import Esine
 from pelaaja import Pelaaja
 from maailma import Osoite
@@ -28,9 +27,9 @@ else:
     while True:
 
         if pelaaja.sijainti.osoite == "kaivos":
-            print("\n--- KAIVOS ---")
+            print("\n--- KAIVOS ---\n")
             print("1. kaiva     - Kaiva kiveä")
-            print("2. pääalue   - Palaa pääalueelle")
+            print("2. kauppa    - Mene kauppaan")
             print("3. inventori - Katso inventori")
             print("4. lopeta    - Lopeta peli")
 
@@ -39,29 +38,29 @@ else:
 
             if inventori[1].nimi == "Puu-Hakku":
                 print("1. päivitä   - Rauta-Hakku (25 kiveä)")
-                print("2. pääalue   - Palaa pääalueelle")
+                print("2. kaivos    - Palaa kaivokseen")
                 print("3. inventori - Katso inventori")
                 print("4. lopeta    - Lopeta peli")
 
             elif inventori[1].nimi == "Rauta-Hakku":
                 print("1. päivitä   - Timantti-Hakku (250 kiveä)")  
-                print("2. pääalue   - Palaa pääalueelle")
+                print("2. kaivos    - Palaa kaivokseen")
                 print("3. inventori - Katso inventori")
                 print("4. lopeta    - Lopeta peli")
 
             else:
                 print("1. pakene    - Pakene kaivoksesta (3000 kiveä)")
-                print("2. pääalue   - Palaa pääalueelle")
+                print("2. kaivos    - Palaa kaivokseen")
                 print("3. inventori - Katso inventori")
                 print("4. lopeta    - Lopeta peli")
 
 
         komento = input("\nSyötä komento: ").strip().lower()
 
-        if komento == "kaivos" and pelaaja.sijainti.osoite == "pääalue":
+        if komento == "kaivos" and pelaaja.sijainti.osoite == "kauppa":
             pelaaja.liikkuminen(Osoite("kaivos"))
 
-        elif komento == "kauppa" and pelaaja.sijainti.osoite == "pääalue":
+        elif komento == "kauppa" and pelaaja.sijainti.osoite == "kaivos":
             pelaaja.liikkuminen(Osoite("kauppa"))
 
         elif komento == "kaiva":
@@ -76,10 +75,10 @@ else:
             print(f"- {inventori[1].nimi}")
 
         elif komento == "lopeta":
-            print("Lopetit pelin.")
+            print("\nLopetit pelin.")
             break
 
-        elif komento == "pakene" and pelaaja.liikkuminen(Osoite("kauppa")) and inventori[1].nimi == "Timantti-Hakku" and inventori[0]["määrä"] >= 3000:
+        elif komento == "pakene" and pelaaja.sijainti.osoite == "kauppa" and inventori[1].nimi == "Timantti-Hakku" and inventori[0]["määrä"] >= 3000:
             print("\nOnnistuit pakenemaan maanpinnalle!")
             print("Voitit pelin!")
             break
