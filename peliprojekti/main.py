@@ -79,8 +79,8 @@ else:
             break
 
         elif komento == "pakene" and pelaaja.sijainti.osoite == "kauppa" and inventori[1].nimi == "Timantti-Hakku" and inventori[0]["määrä"] >= 3000:
-            print("\nOnnistuit pakenemaan maanpinnalle!")
-            print("Voitit pelin!")
+            print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOnnistuit pakenemaan maanpinnalle!")
+            print("Voitit pelin!\n\n\n\n")
             break
 
         else:
